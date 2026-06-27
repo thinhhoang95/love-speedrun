@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Love Speedrun — From Classroom to Saigon</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main id="app">
+    <div id="stage" class="stage">
+      <!-- The game canvas: internal 320x180, scaled up by CSS -->
+      <canvas id="game" width="320" height="180" aria-label="Love Speedrun mini game"></canvas>
+
+      <!-- Top-right utility controls, available in every state -->
+      <div class="util" role="group" aria-label="Game controls">
+        <button id="btn-mute" class="util-btn" type="button" aria-pressed="false" title="Mute / unmute">♪</button>
+        <button id="btn-skip" class="util-btn" type="button" title="Skip the game and open the invitation">Skip ⏭</button>
+      </div>
+
+      <!-- On-screen touch controls (shown on touch devices) -->
+      <div id="touch-controls" class="touch-controls" aria-hidden="true">
+        <button id="btn-jump" class="touch-btn" type="button">JUMP</button>
+        <button id="btn-duck" class="touch-btn" type="button">DUCK</button>
+      </div>
+    </div>
+
+    <!-- The wedding invitation: hidden until the game is finished or skipped -->
+    <section id="invitation" class="invitation" hidden>
+      <div class="card">
+        <p class="eyebrow">Our journey is complete</p>
+        <h1 class="names"><!-- TODO: couple names -->Tên Cô Dâu &amp; Tên Chú Rể</h1>
+        <p class="subtitle">request the pleasure of your company</p>
+        <p class="details">
+          <!-- TODO: real date --><strong>Ngày 00 Tháng 00, 2026</strong><br />
+          <!-- TODO: real venue --><span>Tên Địa Điểm — Sài Gòn, Việt Nam</span>
+        </p>
+        <p class="message">
+          <!-- TODO: personal message -->
+          From a classroom in Vietnam, through Paris, and back to Saigon —
+          we would be honored to have you with us for the next chapter.
+        </p>
+        <button id="btn-replay" class="replay-btn" type="button">↺ Play the journey again</button>
+      </div>
+    </section>
+
+    <noscript>
+      <p style="text-align:center;padding:2rem;">
+        This invitation includes a small game that needs JavaScript.
+        <a href="#invitation">Open the invitation directly »</a>
+      </p>
+    </noscript>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

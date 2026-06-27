@@ -1,0 +1,158 @@
+/* Love Speedrun — layout, retro scaling, UI overlay, invitation card */
+
+:root {
+  --bg: #1a1426;
+  --ink: #2b2233;
+  --gold: #e8c170;
+  --rose: #e87a90;
+  --cream: #fff6e9;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  min-height: 100%;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 12px;
+}
+
+/* ---- Game stage ---- */
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  line-height: 0; /* kill inline-canvas gap */
+}
+
+canvas#game {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 320 / 180;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #000;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  touch-action: manipulation;
+}
+
+/* ---- Utility buttons (mute / skip) ---- */
+.util {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  line-height: 1;
+}
+
+.util-btn {
+  font: 600 13px/1 "Trebuchet MS", sans-serif;
+  color: var(--cream);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  padding: 6px 9px;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+.util-btn:hover { background: rgba(0, 0, 0, 0.65); }
+.util-btn[aria-pressed="true"] { opacity: 0.5; text-decoration: line-through; }
+
+/* ---- Touch controls ---- */
+.touch-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: none;
+  justify-content: space-between;
+  padding: 0 12px;
+  line-height: 1;
+}
+.touch-btn {
+  font: 700 16px/1 "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background: rgba(255, 246, 233, 0.85);
+  border: none;
+  border-radius: 10px;
+  padding: 16px 22px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.touch-btn:active { transform: translateY(2px); }
+
+/* Reveal touch controls only on touch-capable devices */
+@media (hover: none) and (pointer: coarse) {
+  .touch-controls { display: flex; }
+}
+
+/* ---- Invitation ---- */
+.invitation {
+  width: 100%;
+  max-width: 720px;
+  margin-top: 18px;
+  animation: fade-up 0.8s ease both;
+}
+.invitation[hidden] { display: none; }
+
+.card {
+  text-align: center;
+  background: linear-gradient(160deg, #fffaf2, #ffeede);
+  color: var(--ink);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  padding: 38px 28px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  color: var(--rose);
+  margin: 0 0 14px;
+}
+.names {
+  font-size: clamp(28px, 6vw, 46px);
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.subtitle { font-style: italic; margin: 0 0 22px; color: #6c5a72; }
+.details { font-size: 18px; line-height: 1.7; margin: 0 0 22px; }
+.message { max-width: 46ch; margin: 0 auto 26px; line-height: 1.7; color: #4a3d52; }
+
+.replay-btn {
+  font: 600 15px/1 "Trebuchet MS", sans-serif;
+  color: var(--cream);
+  background: var(--rose);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 22px;
+  cursor: pointer;
+}
+.replay-btn:hover { filter: brightness(1.05); }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .invitation { animation: none; }
+}
