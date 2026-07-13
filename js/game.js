@@ -22,11 +22,12 @@ const FIXED = 1 / 60; // physics step
 const TOTAL_REQUIRED = Object.values(ITEMS).filter((d) => d.required).length;
 
 export class Game {
-  constructor(renderer, audio, input, { onInvitation } = {}) {
+  constructor(renderer, audio, input, { onInvitation, onGameStart } = {}) {
     this.r = renderer;
     this.audio = audio;
     this.input = input;
     this.onInvitation = onInvitation || (() => {});
+    this.onGameStart = onGameStart || (() => {});
 
     this.player = new Player();
     this.state = State.TITLE;
@@ -107,6 +108,7 @@ export class Game {
     if (this.input.consumeConfirm()) {
       this._beginStage(0);
       this.state = State.PLAYING;
+      this.onGameStart();
     }
   }
 
@@ -248,7 +250,7 @@ export class Game {
     // No hard game over — love always finds a way.
     if (this.player.hearts <= 0) {
       this.player.hearts = 2;
-      this._toast("Love always finds a way!");
+      this._toast("Tình yêu luôn tìm thấy con đường!");
     }
   }
 
@@ -360,7 +362,7 @@ export class Game {
       if (this.state === State.STAGE_CLEAR) this._renderStageClear();
       if (this.toastTimer > 0) this.r.toast(this.toastMsg);
       if (this.state === State.PLAYING && this.stageTimer < 4) {
-        this.r.text("Tap / Space to Jump · Down to Duck", VW / 2, VH - 8,
+        this.r.text("Nhảy: Space/Chạm · Cúi: ↓/Vuốt", VW / 2, VH - 8,
           { size: 7, align: "center", color: "rgba(255,255,255,0.85)" });
       }
     }
@@ -369,19 +371,19 @@ export class Game {
 
   _renderTitle() {
     this.r.dim(0.5);
-    this.r.text("LOVE SPEEDRUN", VW / 2, 70, { size: 20, align: "center", color: "#ffd9a0" });
-    this.r.text("From Classroom to Saigon", VW / 2, 88, { size: 9, align: "center", color: "#fff" });
+    this.r.text("OUR LOVE STORY", VW / 2, 70, { size: 20, align: "center", color: "#ffd9a0" });
+    this.r.text("Đưa cô dâu và chú rể đến với nhau", VW / 2, 88, { size: 8, align: "center", color: "#fff" });
     if (Math.floor(performance.now() / 500) % 2 === 0) {
-      this.r.text("▶ Press Space / Tap to begin", VW / 2, 120, { size: 9, align: "center", color: "#aee9ff" });
+      this.r.text("▶ Nhấn Space / Chạm để bắt đầu", VW / 2, 120, { size: 9, align: "center", color: "#aee9ff" });
     }
   }
 
   _renderStageClear() {
     this.r.dim(0.45);
     const s = this.stage;
-    this.r.text(`Chapter ${this.stageIndex + 1} Complete`, VW / 2, 78, { size: 12, align: "center", color: "#ffd9a0" });
+    this.r.text(`Chương ${this.stageIndex + 1} Hoàn Thành`, VW / 2, 78, { size: 12, align: "center", color: "#ffd9a0" });
     this.r.text(s.subtitle, VW / 2, 96, { size: 9, align: "center", color: "#fff" });
-    this.r.text(`Score ${this.score.toLocaleString()}`, VW / 2, 116, { size: 8, align: "center", color: "#aee9ff" });
+    this.r.text(`Điểm: ${this.score.toLocaleString()}`, VW / 2, 116, { size: 8, align: "center", color: "#aee9ff" });
   }
 
   _renderFinale() {
@@ -416,14 +418,14 @@ export class Game {
 
     this.r.particles(this.particles);
 
-    this.r.text("LOVE SPEEDRUN COMPLETE", VW / 2, 26, { size: 11, align: "center", color: "#fff" });
+    this.r.text("HÀNH TRÌNH HOÀN TẤT", VW / 2, 26, { size: 11, align: "center", color: "#fff" });
     const done = this.inventory.filter((d) => d.required).length;
-    const msg = done >= TOTAL_REQUIRED ? "Our journey is complete" : `Memories: ${done}/${TOTAL_REQUIRED}`;
+    const msg = done >= TOTAL_REQUIRED ? "Hành trình hoàn tất" : `Kỷ niệm: ${done}/${TOTAL_REQUIRED}`;
     this.r.text(msg, VW / 2, 40, { size: 8, align: "center", color: "#ffd9a0" });
-    this.r.text(`Journey Score ${this.score.toLocaleString()} · ${rankForScore(this.score)}`,
+    this.r.text(`Điểm: ${this.score.toLocaleString()} · ${rankForScore(this.score)}`,
       VW / 2, VH - 22, { size: 8, align: "center", color: "#fff" });
     if (this.finaleTimer > 2.4 && Math.floor(performance.now() / 500) % 2 === 0) {
-      this.r.text("Open Invitation ▶", VW / 2, VH - 8, { size: 9, align: "center", color: "#aee9ff" });
+      this.r.text("Mở thiệp mời ▶", VW / 2, VH - 8, { size: 9, align: "center", color: "#aee9ff" });
     }
   }
 

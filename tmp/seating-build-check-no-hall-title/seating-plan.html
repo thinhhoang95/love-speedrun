@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#152014" />
+  <meta name="description" content="Sơ đồ chỗ ngồi lễ thành hôn của Thịnh và Vy." />
+  <title>Thịnh &amp; Vy — Sơ Đồ Chỗ Ngồi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Great+Vibes&amp;display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/seatingPlan-D91EbXdd.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/seatingPlan-C5DZRz8z.css">
+</head>
+<body>
+  <a class="skip-link" href="#guest-search">Tìm chỗ ngồi của bạn</a>
+
+  <header class="plan-hero paper">
+    <div class="paper__grain" aria-hidden="true"></div>
+    <a class="back-link" href="invitation.html" aria-label="Trở về thiệp cưới">
+      <span aria-hidden="true">←</span> Thiệp cưới
+    </a>
+    <img
+      class="plan-hero__monogram"
+      src="/assets/monogram-official-192-DCbRPAk4.png"
+      alt=""
+      width="192"
+      height="281"
+    />
+    <p class="plan-hero__kicker">Thịnh &amp; Vy · 02.08.2026</p>
+    <h1>Sơ đồ chỗ ngồi</h1>
+    <p class="plan-hero__intro">Nhập tên của bạn để chúng mình dẫn bạn đến đúng bàn nhé.</p>
+  </header>
+
+  <main>
+    <section class="plan-section paper" aria-label="Sơ đồ sảnh tiệc">
+      <div class="paper__grain" aria-hidden="true"></div>
+
+      <div class="finder-shell" aria-labelledby="finder-title">
+        <div class="finder-heading">
+          <span class="finder-heading__ornament" aria-hidden="true"></span>
+          <div>
+            <p>Tìm chỗ của bạn</p>
+            <h2 id="finder-title">Bạn tên là gì?</h2>
+          </div>
+        </div>
+
+        <form class="guest-search" id="guest-search-form" role="search" autocomplete="off">
+          <label class="guest-search__field" for="guest-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="m16 16 4 4"></path>
+            </svg>
+            <span class="sr-only">Tên khách mời</span>
+            <input
+              id="guest-search"
+              name="guest"
+              type="search"
+              placeholder="Ví dụ: Cậu Anh, Nguyễn Văn Anh…"
+              aria-autocomplete="list"
+              aria-controls="guest-suggestions"
+              aria-expanded="false"
+            />
+          </label>
+          <ul class="guest-suggestions" id="guest-suggestions" role="listbox" hidden></ul>
+        </form>
+
+        <p class="finder-status" id="finder-status" role="status" aria-live="polite">
+          Chọn tên trong danh sách gợi ý để xem vị trí bàn.
+        </p>
+      </div>
+
+      <header class="plan-section__heading">
+        <div class="plan-legend" aria-label="Chú giải sơ đồ">
+          <span><i class="legend-dot legend-dot--table"></i>Bàn tiệc · 12 ghế</span>
+          <span><i class="legend-line"></i>Lối đi chính</span>
+        </div>
+        <p class="plan-pan-hint">Vuốt ngang để xem toàn bộ sơ đồ</p>
+      </header>
+
+      <div class="hall-scroll" id="hall-scroll" tabindex="0" aria-label="Sơ đồ sảnh tiệc, có thể cuộn ngang trên màn hình nhỏ">
+        <div class="hall" id="hall" aria-busy="true">
+          <section class="wedding-stage" aria-label="Sân khấu">
+            <img src="/assets/stage-flowers-48wFgN_5.webp" alt="" aria-hidden="true" />
+            <div class="wedding-stage__title">
+              <span>Sân khấu</span>
+              <strong>Thịnh <i>&amp;</i> Vy</strong>
+              <small>02 · 08 · 2026</small>
+            </div>
+            <img src="/assets/stage-flowers-48wFgN_5.webp" alt="" aria-hidden="true" />
+          </section>
+
+          <div class="hall-grid" id="hall-grid">
+            <div class="main-aisle" aria-label="Lối đi chính">
+              <span>Lối đi</span>
+              <i aria-hidden="true">↑</i>
+            </div>
+          </div>
+
+          <div class="hall-entrances" aria-label="Lối vào sảnh tiệc">
+            <div><span aria-hidden="true">↗</span><strong>Lối vào</strong><small>Nhà trai</small></div>
+            <p>Chào mừng bạn đến chung vui cùng chúng mình</p>
+            <div><span aria-hidden="true">↖</span><strong>Lối vào</strong><small>Nhà gái</small></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="load-error" id="load-error" role="alert" hidden>
+        Chưa thể tải sơ đồ chỗ ngồi. Bạn vui lòng thử tải lại trang.
+      </p>
+    </section>
+  </main>
+
+  <footer class="plan-footer">
+    <p>Hẹn gặp bạn tại ngày vui của</p>
+    <strong>Thịnh &amp; Vy</strong>
+  </footer>
+
+</body>
+</html>

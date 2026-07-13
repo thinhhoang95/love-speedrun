@@ -214,18 +214,18 @@ export const ITEMS = {
 
 // Funny messages shown briefly when the player takes a hit, keyed by stage.
 export const HIT_MESSAGES = {
-  classroom: ["Oops, dropped the homework!", "Tripped over a chair!", "Chalk dust everywhere!"],
-  paris: ["Committee question dodged badly!", "Answer revised!", "Croissant break gone wrong!"],
-  saigon: ["Coffee spill!", "Mind the motorbike!", "Deadline caught up!"],
+  classroom: ["Ôi, làm rơi vở rồi!", "Vấp ghế mất rồi!", "Bụi phấn bay đầy mặt!"],
+  paris: ["Câu hỏi hội đồng quá khó!", "Phải sửa câu trả lời rồi!", "Ăn croissant nhầm giờ!"],
+  saigon: ["Cà phê đổ rồi!", "Cẩn thận xe máy!", "Deadline đuổi kịp rồi!"],
 };
 
 // Sweet, non-competitive ranks based on final score.
 export const RANKS = [
-  { min: 0, label: "Cute Beginning" },
-  { min: 1500, label: "Long-Distance Legends" },
-  { min: 3000, label: "Committee Survivors" },
-  { min: 5000, label: "Saigon Soulmates" },
-  { min: 7000, label: "Wedding Ready" },
+  { min: 0, label: "Khởi Đầu Ngọt Ngào" },
+  { min: 1500, label: "Huyền Thoại Xa Cách" },
+  { min: 3000, label: "Sống Sót Qua Hội Đồng" },
+  { min: 5000, label: "Đôi Tình Nhân Sài Gòn" },
+  { min: 7000, label: "Sẵn Sàng Kết Hôn" },
 ];
 
 export function rankForScore(score) {

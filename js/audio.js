@@ -8,6 +8,9 @@ export class Audio {
   constructor() {
     this.ctx = null;
     this.muted = false;
+    this.bgm = new window.Audio("assets/salut-damour.mp3");
+    this.bgm.loop = true;
+    this.bgm.volume = 0.35;
   }
 
   // Call from the first user gesture.
@@ -17,10 +20,11 @@ export class Audio {
       if (AC) this.ctx = new AC();
     }
     if (this.ctx && this.ctx.state === "suspended") this.ctx.resume();
+    if (!this.muted && this.bgm.paused) this.bgm.play().catch(() => {});
   }
 
-  setMuted(m) { this.muted = m; }
-  toggleMute() { this.muted = !this.muted; return this.muted; }
+  setMuted(m) { this.muted = m; this.bgm.muted = m; }
+  toggleMute() { this.muted = !this.muted; this.bgm.muted = this.muted; return this.muted; }
 
   // Play one tone. freq Hz, dur seconds, type waveform, gain 0..1, delay sec.
   _tone(freq, dur, type = "square", gain = 0.12, delay = 0) {

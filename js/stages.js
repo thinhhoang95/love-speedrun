@@ -44,8 +44,8 @@ function build({ start = 1.0, gap, count, obstacles, memories, injects = [], end
 export const STAGES = [
   {
     id: "classroom",
-    title: "Chapter 1: Vietnamese Classroom",
-    subtitle: "First Memories",
+    title: "Chương 1: Lớp Học",
+    subtitle: "Kỷ Niệm Đầu Tiên",
     duration: 16,
     speed: 118, // virtual px / second
     theme: "classroom",
@@ -59,8 +59,8 @@ export const STAGES = [
   },
   {
     id: "paris",
-    title: "Chapter 2: Paris",
-    subtitle: "Study, Distance & Achievement",
+    title: "Chương 2: Paris",
+    subtitle: "Học Tập, Xa Cách & Thành Tựu",
     duration: 19,
     speed: 140,
     theme: "paris",
@@ -75,8 +75,8 @@ export const STAGES = [
   },
   {
     id: "saigon",
-    title: "Chapter 3: Saigon",
-    subtitle: "Back Home",
+    title: "Chương 3: Sài Gòn",
+    subtitle: "Trở Về Nhà",
     duration: 19.5,
     speed: 156,
     theme: "saigon",

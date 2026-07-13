@@ -13,41 +13,71 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background: #000;
   color: var(--cream);
   font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
-  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 12px;
+  height: 100%;
 }
 
-/* ---- Game stage ---- */
+/* ---- Game stage: fixed full-viewport black backdrop ---- */
 .stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+/* ---- Canvas wrapper: exactly the size of the scaled canvas ---- */
+.canvas-wrap {
   position: relative;
-  width: 100%;
-  max-width: 960px;
-  line-height: 0; /* kill inline-canvas gap */
+  /* Maintain 320:180 (16:9) while fitting inside the viewport */
+  width: min(100vw, calc(100vh * 320 / 180));
+  height: min(100vh, calc(100vw * 180 / 320));
+  line-height: 0;
 }
 
 canvas#game {
   display: block;
   width: 100%;
-  max-width: 960px;
-  aspect-ratio: 320 / 180;
-  height: auto;
+  height: 100%;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   background: #000;
-  border-radius: 8px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   touch-action: manipulation;
+}
+
+/* ---- Big title-screen skip button ---- */
+.skip-title-btn {
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 700 clamp(14px, 2.5vmin, 20px)/1 "Trebuchet MS", sans-serif;
+  color: var(--cream);
+  background: rgba(232, 122, 144, 0.88);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.7em 2em;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+  z-index: 10;
+  letter-spacing: 0.05em;
+  animation: pulse-skip 2s ease-in-out infinite;
+}
+.skip-title-btn:hover { background: rgba(232, 122, 144, 1); animation: none; }
+.skip-title-btn[hidden] { display: none; }
+
+@keyframes pulse-skip {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 122, 144, 0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(232, 122, 144, 0); }
 }
 
 /* ---- Utility buttons (mute / skip) ---- */
@@ -85,12 +115,12 @@ canvas#game {
   line-height: 1;
 }
 .touch-btn {
-  font: 700 16px/1 "Trebuchet MS", sans-serif;
+  font: 700 clamp(12px, 2vmin, 16px)/1 "Trebuchet MS", sans-serif;
   color: var(--ink);
   background: rgba(255, 246, 233, 0.85);
   border: none;
   border-radius: 10px;
-  padding: 16px 22px;
+  padding: 0.8em 1.2em;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
@@ -152,7 +182,103 @@ canvas#game {
   to { opacity: 1; transform: none; }
 }
 
+/* ---- Scoreboard: fixed overlay above the game ---- */
+.scoreboard {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(26, 20, 38, 0.9);
+  z-index: 20;
+  overflow-y: auto;
+}
+.scoreboard[hidden] { display: none; }
+
+.scoreboard .card {
+  max-width: 680px;
+  width: 100%;
+  animation: fade-up 0.8s ease both;
+}
+
+.score-display {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--rose);
+  margin: 0 0 8px;
+}
+.score-label { margin: 0 0 14px; color: #4a3d52; }
+
+.name-input-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#player-name {
+  font: 600 15px/1 "Trebuchet MS", sans-serif;
+  padding: 10px 14px;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  background: #fffaf2;
+  color: var(--ink);
+  width: 220px;
+  max-width: 100%;
+}
+#player-name:focus { outline: none; border-color: var(--rose); }
+
+.save-btn {
+  font: 600 15px/1 "Trebuchet MS", sans-serif;
+  color: var(--cream);
+  background: var(--rose);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.save-btn:hover { filter: brightness(1.05); }
+
+.lb-title {
+  font-size: 16px;
+  color: var(--rose);
+  margin: 24px 0 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 20px;
+  max-width: 480px;
+}
+
+.leaderboard-list li {
+  display: grid;
+  grid-template-columns: 32px 1fr auto auto;
+  gap: 6px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  background: rgba(232, 193, 112, 0.08);
+  color: var(--ink);
+  font-size: 14px;
+}
+.leaderboard-list li.top {
+  background: linear-gradient(90deg, rgba(232, 193, 112, 0.22), rgba(232, 122, 144, 0.12));
+  font-weight: 700;
+}
+.leaderboard-list li.current { outline: 2px solid var(--rose); }
+
+.lb-pos { color: var(--rose); font-weight: 700; }
+.lb-name { text-align: left; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lb-score { color: var(--rose); font-weight: 700; font-variant-numeric: tabular-nums; }
+.lb-badge { font-size: 11px; color: #7a6080; text-align: right; }
+
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .invitation { animation: none; }
+  .invitation, .scoreboard .card, .skip-title-btn { animation: none; }
 }
