@@ -776,6 +776,143 @@ a { color: inherit; }
   text-align: center;
 }
 
+body:has(.availability-dialog[open]) { overflow: hidden; }
+
+.availability-dialog {
+  width: min(calc(100% - 28px), 560px);
+  max-width: none;
+  max-height: calc(100dvh - 28px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  color: var(--blue-strong);
+  background: transparent;
+  border: 0;
+  scrollbar-width: none;
+}
+
+.availability-dialog::-webkit-scrollbar { display: none; }
+
+.availability-dialog::backdrop {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(42, 57, 38, .28), rgba(10, 20, 10, .82)),
+    rgba(21, 32, 20, .72);
+  backdrop-filter: blur(7px) saturate(.72);
+}
+
+.availability-dialog__card {
+  position: relative;
+  padding: clamp(44px, 8vw, 66px) clamp(25px, 7vw, 58px) clamp(34px, 6vw, 48px);
+  overflow: hidden;
+  border: 1px solid rgba(82, 106, 168, .5);
+  box-shadow:
+    0 30px 90px rgba(7, 15, 7, .42),
+    inset 0 0 0 7px rgba(255, 255, 255, .42);
+  text-align: center;
+}
+
+.availability-dialog__card::before,
+.availability-dialog__card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 155px;
+  height: 235px;
+  background: url("../assets/generated/botanicals-v2/wildflower-tall.webp") center / contain no-repeat;
+  opacity: .2;
+  pointer-events: none;
+}
+
+.availability-dialog__card::before {
+  bottom: -105px;
+  left: -50px;
+  transform: rotate(24deg);
+}
+
+.availability-dialog__card::after {
+  top: -112px;
+  right: -48px;
+  transform: rotate(203deg);
+}
+
+.availability-dialog__monogram {
+  width: 38px;
+  height: auto;
+  margin: 0 auto .9rem;
+}
+
+.availability-dialog__eyebrow {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.availability-dialog h2 {
+  margin: .35rem 0 .8rem;
+  color: var(--blue-strong);
+  font-family: var(--font-script);
+  font-size: clamp(3rem, 10vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.availability-dialog__divider {
+  width: 62px;
+  height: 1px;
+  display: block;
+  margin: 0 auto 1.2rem;
+  background: var(--gold);
+}
+
+.availability-dialog__message {
+  position: relative;
+  z-index: 1;
+  max-width: 430px;
+  margin: 0 auto;
+  color: #34405f;
+  font-family: var(--font-serif);
+  font-size: clamp(1.08rem, 3vw, 1.28rem);
+  line-height: 1.55;
+}
+
+.availability-dialog__action {
+  position: relative;
+  z-index: 1;
+  min-width: 180px;
+  min-height: 46px;
+  display: inline-grid;
+  place-items: center;
+  margin-top: 1.7rem;
+  padding: .8rem 1.5rem;
+  color: var(--paper-bright);
+  background: var(--blue-strong);
+  border: 1px solid var(--blue-strong);
+  font: 500 .65rem/1 var(--font-ui);
+  letter-spacing: .14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .25s ease, background .25s ease, transform .25s var(--ease);
+}
+
+.availability-dialog__action:hover {
+  color: var(--blue-strong);
+  background: rgba(255, 255, 255, .62);
+  transform: translateY(-2px);
+}
+
+.availability-dialog[open] .availability-dialog__card {
+  animation: availability-dialog-in .45s var(--ease) both;
+}
+
+@keyframes availability-dialog-in {
+  from { opacity: 0; transform: translateY(16px) scale(.975); }
+  to { opacity: 1; transform: none; }
+}
+
 .table-dialog {
   position: fixed;
   inset: auto;

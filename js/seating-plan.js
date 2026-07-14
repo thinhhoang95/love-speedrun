@@ -2,6 +2,9 @@ import { getTranslations, initializeLanguage } from './invitation-i18n.js';
 
 initializeLanguage();
 
+// Change this to true when the final seating data is ready to publish.
+const SEATING_PLAN_AVAILABLE = false;
+
 const searchForm = document.getElementById('guest-search-form');
 const searchInput = document.getElementById('guest-search');
 const suggestionList = document.getElementById('guest-suggestions');
@@ -16,6 +19,9 @@ const tableDialogNumber = document.getElementById('table-dialog-number');
 const tableDialogTitle = document.getElementById('table-dialog-title');
 const tableDialogCount = document.getElementById('table-dialog-count');
 const tableDialogGuests = document.getElementById('table-dialog-guests');
+const unavailableDialog = document.getElementById('seating-unavailable-dialog');
+const chairImageUrl = new URL('../assets/generated/seating-plan/chair.webp', import.meta.url).href;
+const tableImageUrl = new URL('../assets/generated/seating-plan/table.webp', import.meta.url).href;
 
 let guests = [];
 let tablesById = new Map();
@@ -187,7 +193,7 @@ function renderSelectedGuestStatus() {
 function createChair(index) {
   const chair = document.createElement('img');
   chair.className = 'seat-chair';
-  chair.src = 'assets/generated/seating-plan/chair.webp';
+  chair.src = chairImageUrl;
   chair.alt = '';
   chair.setAttribute('aria-hidden', 'true');
   chair.decoding = 'async';
@@ -288,7 +294,7 @@ function createTable(table) {
   for (let index = 0; index < 12; index += 1) seatSet.append(createChair(index));
 
   tableImage.className = 'seat-table-image';
-  tableImage.src = 'assets/generated/seating-plan/table.webp';
+  tableImage.src = tableImageUrl;
   tableImage.alt = '';
   tableImage.setAttribute('aria-hidden', 'true');
   tableImage.decoding = 'async';
@@ -437,4 +443,11 @@ document.addEventListener('invitation:languagechange', () => {
   }
 });
 
-loadSeatingPlan();
+if (SEATING_PLAN_AVAILABLE) {
+  loadSeatingPlan();
+} else {
+  hall.setAttribute('aria-busy', 'false');
+  searchInput.disabled = true;
+  unavailableDialog?.addEventListener('cancel', (event) => event.preventDefault());
+  unavailableDialog?.showModal();
+}

@@ -1,14 +1,16 @@
 // audio.js — tiny retro SFX synthesized with the Web Audio API.
 //
-// No audio files required. The AudioContext is created lazily and resumed on
-// the first user gesture (browsers block autoplay). A mute toggle silences all
-// output. Each effect is a short oscillator blip / arpeggio.
+// The AudioContext and background music are started lazily on the first user
+// gesture (browsers block autoplay). A mute toggle silences all output. Each
+// sound effect is a short oscillator blip / arpeggio.
+
+const backgroundMusicUrl = new URL('../assets/salut-damour.mp3', import.meta.url).href;
 
 export class Audio {
   constructor() {
     this.ctx = null;
     this.muted = false;
-    this.bgm = new window.Audio("assets/salut-damour.mp3");
+    this.bgm = new window.Audio(backgroundMusicUrl);
     this.bgm.loop = true;
     this.bgm.volume = 0.35;
   }

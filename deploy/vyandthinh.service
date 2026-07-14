@@ -1,0 +1,31 @@
+[Unit]
+Description=Vy and Thinh wedding API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=vyandthinh
+Group=vyandthinh
+WorkingDirectory=/srv/vyandthinh/current
+EnvironmentFile=/srv/vyandthinh/shared/.env
+Environment=HOST=127.0.0.1
+Environment=PORT=8787
+Environment=OPENROUTER_SITE_URL=https://vyandthinh.intuelle.com
+ExecStart=/usr/bin/node /srv/vyandthinh/current/server/production.js
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=15s
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target
