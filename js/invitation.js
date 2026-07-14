@@ -65,10 +65,28 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
   document.documentElement.classList.add('reveal-enabled');
 }
 
-/* Background music is opt-in and never interrupts the guest on load. */
+/* Start background music on load when the browser permits unmuted autoplay. */
 const musicButton = document.getElementById('music-toggle');
-let music = null;
+const music = musicButton
+  ? new Audio(new URL('../assets/salut-damour-full.mp3', import.meta.url).href)
+  : null;
 let musicPlaying = false;
+
+if (music) {
+  music.loop = true;
+  music.preload = 'auto';
+  music.autoplay = true;
+  music.volume = 0.42;
+  music.addEventListener('play', () => {
+    musicPlaying = true;
+    syncMusicButton();
+    removeAutoplayFallback();
+  });
+  music.addEventListener('pause', () => {
+    musicPlaying = false;
+    syncMusicButton();
+  });
+}
 
 function syncMusicButton() {
   if (!musicButton) return;
@@ -78,32 +96,47 @@ function syncMusicButton() {
   musicButton.setAttribute('aria-label', musicPlaying ? text.music_off : text.music_on);
 }
 
+async function startMusic() {
+  if (!music) return false;
+
+  try {
+    await music.play();
+    return true;
+  } catch {
+    musicPlaying = false;
+    syncMusicButton();
+    return false;
+  }
+}
+
+function removeAutoplayFallback() {
+  document.removeEventListener('pointerdown', startMusicAfterInteraction, true);
+  document.removeEventListener('keydown', startMusicAfterInteraction, true);
+}
+
+function startMusicAfterInteraction(event) {
+  if (event.target instanceof Element && event.target.closest('#music-toggle')) return;
+  void startMusic();
+}
+
+function installAutoplayFallback() {
+  document.addEventListener('pointerdown', startMusicAfterInteraction, true);
+  document.addEventListener('keydown', startMusicAfterInteraction, true);
+}
+
 if (musicButton) {
   musicButton.addEventListener('click', async () => {
-    try {
-      if (!music) {
-        music = new Audio(new URL('../assets/salut-damour-full.mp3', import.meta.url).href);
-        music.loop = true;
-        music.preload = 'metadata';
-        music.volume = 0.42;
-        music.addEventListener('pause', () => {
-          musicPlaying = false;
-          syncMusicButton();
-        });
-      }
-
-      if (musicPlaying) {
-        music.pause();
-      } else {
-        await music.play();
-        musicPlaying = true;
-        syncMusicButton();
-      }
-    } catch (error) {
-      console.error('Không thể phát nhạc nền:', error);
-      musicPlaying = false;
-      syncMusicButton();
+    if (musicPlaying) {
+      music?.pause();
+      return;
     }
+
+    const started = await startMusic();
+    if (!started) console.error('Không thể phát nhạc nền.');
+  });
+
+  void startMusic().then((started) => {
+    if (!started) installAutoplayFallback();
   });
 }
 

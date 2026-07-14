@@ -1,5 +1,6 @@
 const WISH_COUNT_OFFSET = 24;
 const COUNTRY_COUNT = 6;
+const REQUEST_TIMEOUT_MS = 5_000;
 
 const LABELS = {
   vi: 'lời chúc đã được gửi đến Vy & Thịnh từ Việt Nam, Pháp, Trung Quốc, Hoa Kỳ, Hàn Quốc, Úc... ❦',
@@ -9,27 +10,48 @@ const LABELS = {
   ja: '件のメッセージがベトナム、フランス、中国、アメリカ、韓国、オーストラリアなどから Vy & Thịnh に届いています ❦',
 };
 
-export async function getWishStats() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-  const res = await fetch(`${url}/rest/v1/wishes?select=*`, {
-    method: 'HEAD',
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      Prefer: 'count=exact',
-    },
-  });
-
-  if (!res.ok) throw new Error(`Supabase HEAD failed: ${res.status}`);
-
-  const contentRange = res.headers.get('content-range') ?? '';
-  const total = parseInt(contentRange.split('/')[1] ?? '0', 10);
-
+function fallbackStats() {
   return {
-    count: (isNaN(total) ? 0 : total) + WISH_COUNT_OFFSET,
+    count: WISH_COUNT_OFFSET,
     countryCount: COUNTRY_COUNT,
     labels: LABELS,
   };
+}
+
+export async function getWishStats({
+  fetchImpl = fetch,
+  url = process.env.NEXT_PUBLIC_SUPABASE_URL,
+  key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+  signal = AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+} = {}) {
+  if (!url || !key) return fallbackStats();
+
+  try {
+    const res = await fetchImpl(`${url}/rest/v1/wishes?select=*`, {
+      method: 'HEAD',
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        Prefer: 'count=exact',
+      },
+      signal,
+    });
+
+    if (!res.ok) return fallbackStats();
+
+    const contentRange = res.headers.get('content-range') ?? '';
+    const total = Number.parseInt(contentRange.split('/')[1] ?? '', 10);
+
+    if (!Number.isFinite(total)) return fallbackStats();
+
+    return {
+      count: total + WISH_COUNT_OFFSET,
+      countryCount: COUNTRY_COUNT,
+      labels: LABELS,
+    };
+  } catch {
+    // Stats are decorative and should not turn a temporary database or DNS
+    // outage into a failed API request. The form reports write errors itself.
+    return fallbackStats();
+  }
 }

@@ -1,7 +1,43 @@
 import { defineConfig, loadEnv } from 'vite';
 import { resolve } from 'path';
+import { readFile } from 'node:fs/promises';
 import { generateWish } from './server/generateWish.js';
 import { getWishStats } from './server/wishStats.js';
+
+const HTML_PAGES = new Set([
+  '/',
+  '/index.html',
+  '/invitation.html',
+  '/seating-plan.html',
+  '/404.html',
+]);
+
+function isUnknownPageRequest(req) {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return false;
+  if (!req.headers.accept?.includes('text/html')) return false;
+
+  const pathname = new URL(req.url || '/', 'http://localhost').pathname;
+  return !pathname.startsWith('/api/') && !HTML_PAGES.has(pathname);
+}
+
+function serveNotFound(readHtml, transformHtml = (_url, html) => html) {
+  return async (req, res, next) => {
+    if (!isUnknownPageRequest(req)) {
+      next();
+      return;
+    }
+
+    try {
+      const source = await readHtml();
+      const html = await transformHtml('/404.html', source);
+      res.statusCode = 404;
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      res.end(req.method === 'HEAD' ? undefined : html);
+    } catch (error) {
+      next(error);
+    }
+  };
+}
 
 async function readJsonBody(req) {
   const chunks = [];
@@ -14,6 +50,9 @@ export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
 
   return {
+  // This is a multi-page site. SPA mode rewrites missing URLs to index.html,
+  // which would incorrectly show the game instead of the not-found page.
+  appType: 'mpa',
   // Expose NEXT_PUBLIC_* vars (alongside the default VITE_* prefix)
   envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
   plugins: [{
@@ -62,6 +101,16 @@ export default defineConfig(({ mode }) => {
           }));
         }
       });
+
+      server.middlewares.use(serveNotFound(
+        () => readFile(resolve(__dirname, '404.html'), 'utf8'),
+        server.transformIndexHtml,
+      ));
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(serveNotFound(
+        () => readFile(resolve(server.config.root, server.config.build.outDir, '404.html'), 'utf8'),
+      ));
     },
   }],
   build: {
@@ -70,6 +119,7 @@ export default defineConfig(({ mode }) => {
         main: resolve(__dirname, 'index.html'),
         invitation: resolve(__dirname, 'invitation.html'),
         seatingPlan: resolve(__dirname, 'seating-plan.html'),
+        notFound: resolve(__dirname, '404.html'),
       },
     },
   },
