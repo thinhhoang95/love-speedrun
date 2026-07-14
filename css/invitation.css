@@ -868,11 +868,71 @@ a { color: inherit; }
 .footer__sprig--right { right: clamp(-70px, -3vw, -22px); transform: scaleX(-1); }
 
 /* Music control */
-.music-toggle {
+.music-control {
   position: fixed;
   z-index: 60;
   right: clamp(14px, 2.5vw, 28px);
   bottom: clamp(14px, 2.5vw, 28px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.music-credit {
+  position: relative;
+  width: min(290px, calc(100vw - 100px));
+  padding: 10px 14px;
+  color: var(--blue-strong);
+  background: rgba(251, 249, 244, .94);
+  border: 1px solid rgba(100, 127, 196, .28);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(32, 44, 77, .14);
+  backdrop-filter: blur(8px);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+.music-credit::after {
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  width: 10px;
+  height: 10px;
+  background: rgba(251, 249, 244, .94);
+  border-top: 1px solid rgba(100, 127, 196, .28);
+  border-right: 1px solid rgba(100, 127, 196, .28);
+  content: '';
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.music-credit p {
+  margin: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .66rem;
+  line-height: 1.45;
+}
+
+.music-credit p:first-child {
+  margin-bottom: 2px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.music-credit.is-auto-hidden {
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+}
+
+.music-control:hover .music-credit.is-auto-hidden,
+.music-control:focus-within .music-credit.is-auto-hidden {
+  opacity: 1;
+  transform: none;
+}
+
+.music-toggle {
+  position: relative;
+  flex: 0 0 auto;
   width: 48px;
   height: 48px;
   display: grid;

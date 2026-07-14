@@ -119,7 +119,7 @@
               <div class="family family--right">
                 <p class="script-note script-note--small" data-i18n="parents">Ông, Bà</p>
                 <p class="family__names">
-                  <span>TRẨN QUANG TRUYỀN</span>
+                  <span>TRẦN QUANG TRUYỀN</span>
                   <span>TRƯƠNG THỊ HIẾU</span>
                 </p>
                 <p class="family__address" data-i18n="family_address">P. Bàn Cờ, Tp. Hồ Chí Minh</p>
@@ -415,14 +415,21 @@
     />
   </footer>
 
-  <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-label="Bật nhạc nền" data-i18n-music>
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M9 18V5l10-2v13" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="16" cy="16" r="3" />
-    </svg>
-    <span class="music-toggle__waves" aria-hidden="true"></span>
-  </button>
+  <div class="music-control">
+    <div class="music-credit" id="music-credit">
+      <p><cite>Salut d'Amour</cite></p>
+      <p>Composer: Edward Elgar</p>
+      <p>Performed by: Esther Abrami and Iyad Sughayer</p>
+    </div>
+    <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-label="Bật nhạc nền" data-i18n-music>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18V5l10-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="16" cy="16" r="3" />
+      </svg>
+      <span class="music-toggle__waves" aria-hidden="true"></span>
+    </button>
+  </div>
 
   <script type="module" src="js/invitation.js"></script>
 </body>

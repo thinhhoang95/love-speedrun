@@ -67,10 +67,17 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 
 /* Start background music on load when the browser permits unmuted autoplay. */
 const musicButton = document.getElementById('music-toggle');
+const musicCredit = document.getElementById('music-credit');
 const music = musicButton
   ? new Audio(new URL('../assets/salut-damour-full.mp3', import.meta.url).href)
   : null;
 let musicPlaying = false;
+
+if (musicCredit) {
+  window.setTimeout(() => {
+    musicCredit.classList.add('is-auto-hidden');
+  }, 6500);
+}
 
 if (music) {
   music.loop = true;
