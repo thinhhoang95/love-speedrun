@@ -28,8 +28,42 @@ const viewerCaption = document.getElementById('gallery-viewer-caption');
 const closeButton = viewer?.querySelector('.gallery-viewer__close');
 const previousButton = viewer?.querySelector('.gallery-viewer__nav--previous');
 const nextButton = viewer?.querySelector('.gallery-viewer__nav--next');
+const tabList = document.querySelector('.photo-gallery__tabs');
+const tabButtons = Array.from(tabList?.querySelectorAll('[role="tab"]') || []);
+const tabPanels = Array.from(document.querySelectorAll('[data-gallery-panel]'));
 let activePhoto = 0;
 let galleryExpanded = false;
+
+function selectGalleryTab(tab, { moveFocus = false } = {}) {
+  const selectedName = tab?.dataset.galleryTab;
+  if (!selectedName) return;
+
+  tabButtons.forEach((button) => {
+    const isSelected = button === tab;
+    button.setAttribute('aria-selected', String(isSelected));
+    button.tabIndex = isSelected ? 0 : -1;
+  });
+
+  tabPanels.forEach((panel) => {
+    panel.hidden = panel.dataset.galleryPanel !== selectedName;
+  });
+
+  if (moveFocus) tab.focus();
+}
+
+tabButtons.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectGalleryTab(tab));
+  tab.addEventListener('keydown', (event) => {
+    let nextIndex;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % tabButtons.length;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + tabButtons.length) % tabButtons.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = tabButtons.length - 1;
+    if (nextIndex === undefined) return;
+    event.preventDefault();
+    selectGalleryTab(tabButtons[nextIndex], { moveFocus: true });
+  });
+});
 
 function getCollapsedPhotoCount() {
   const columnCount = window.matchMedia('(max-width: 980px)').matches ? 2 : 4;

@@ -170,32 +170,60 @@
         <span aria-hidden="true"></span>
       </header>
 
-      <div class="photo-gallery__layout">
-        <img
-          class="photo-gallery__floral photo-gallery__floral--left reveal"
-          src="assets/generated/gallery/floral-left.webp"
-          alt=""
-          width="941"
-          height="1672"
-          loading="lazy"
-          decoding="async"
-        />
-
-        <div class="photo-gallery__grid reveal" id="photo-gallery-grid"></div>
-
-        <button class="photo-gallery__more" id="photo-gallery-more" type="button" aria-controls="photo-gallery-grid" data-i18n="gallery_show_more">
-          Xem thêm
+      <div class="photo-gallery__tabs reveal" role="tablist" aria-label="Chọn bộ sưu tập ảnh" data-i18n-aria="gallery_tabs">
+        <button class="photo-gallery__tab" id="gallery-tab-pre-wedding" type="button" role="tab" aria-selected="true" aria-controls="gallery-panel-pre-wedding" tabindex="0" data-gallery-tab="pre-wedding" data-i18n="gallery_pre_wedding">
+          Pre-wedding
         </button>
+        <button class="photo-gallery__tab" id="gallery-tab-wedding" type="button" role="tab" aria-selected="false" aria-controls="gallery-panel-wedding" tabindex="-1" data-gallery-tab="wedding" data-i18n="gallery_wedding">
+          Wedding
+        </button>
+      </div>
 
-        <img
-          class="photo-gallery__floral photo-gallery__floral--right reveal"
-          src="assets/generated/gallery/floral-right.webp"
-          alt=""
-          width="941"
-          height="1672"
-          loading="lazy"
-          decoding="async"
-        />
+      <div class="photo-gallery__panel" id="gallery-panel-pre-wedding" role="tabpanel" aria-labelledby="gallery-tab-pre-wedding" data-gallery-panel="pre-wedding">
+        <div class="photo-gallery__layout">
+          <img
+            class="photo-gallery__floral photo-gallery__floral--left reveal"
+            src="assets/generated/gallery/floral-left.webp"
+            alt=""
+            width="941"
+            height="1672"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <div class="photo-gallery__grid reveal" id="photo-gallery-grid"></div>
+
+          <button class="photo-gallery__more" id="photo-gallery-more" type="button" aria-controls="photo-gallery-grid" data-i18n="gallery_show_more">
+            Xem thêm
+          </button>
+
+          <img
+            class="photo-gallery__floral photo-gallery__floral--right reveal"
+            src="assets/generated/gallery/floral-right.webp"
+            alt=""
+            width="941"
+            height="1672"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <div class="photo-gallery__panel" id="gallery-panel-wedding" role="tabpanel" aria-labelledby="gallery-tab-wedding" data-gallery-panel="wedding" tabindex="0" hidden>
+        <div class="photo-gallery__empty">
+          <div class="photo-gallery__empty-copy">
+            <p data-i18n="gallery_wedding_empty">Hãy quay trở lại sau ngày cưới để tìm ảnh của bạn ở đây nhé.</p>
+          </div>
+          <img
+            class="photo-gallery__empty-floral"
+            src="assets/generated/gallery/wedding-empty-floral.webp"
+            alt=""
+            width="2172"
+            height="724"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
     </section>
 
