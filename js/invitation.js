@@ -1,5 +1,6 @@
 import './gallery.js';
 import './navigation.js';
+import './meal-preferences.js';
 import { getTranslations, initializeLanguage } from './invitation-i18n.js';
 
 initializeLanguage();

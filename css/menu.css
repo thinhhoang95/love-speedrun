@@ -1,0 +1,482 @@
+/* Wedding menu and meal-preference dialog */
+.wedding-menu {
+  min-height: 720px;
+  padding: clamp(76px, 9vw, 118px) 0 clamp(82px, 10vw, 132px);
+  overflow: hidden;
+  border-top: 1px solid rgba(100, 127, 196, .18);
+}
+
+.wedding-menu__inner { z-index: 2; }
+
+.wedding-menu__botanical {
+  position: absolute;
+  z-index: 0;
+  bottom: -190px;
+  width: clamp(170px, 21vw, 330px);
+  max-width: none;
+  height: auto;
+  opacity: .38;
+  pointer-events: none;
+  user-select: none;
+}
+
+.wedding-menu__botanical--left { left: clamp(-120px, -5vw, -45px); }
+.wedding-menu__botanical--right { right: clamp(-120px, -5vw, -45px); }
+
+.wedding-menu__heading {
+  width: min(100%, 720px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.wedding-menu__heading .script-note { color: var(--blue-soft); }
+
+.wedding-menu__heading h2 {
+  margin: .55rem 0 .65rem;
+  color: var(--blue-strong);
+  font-size: clamp(2.65rem, 6vw, 4.6rem);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.wedding-menu__heading > p:not(.script-note) {
+  max-width: 560px;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+}
+
+.menu-courses {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 56px;
+  width: min(100%, 920px);
+  margin: clamp(38px, 6vw, 64px) auto 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: courses;
+}
+
+.menu-course {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 18px;
+  min-height: 154px;
+  padding: 24px 0 25px;
+  border-top: 1px solid var(--blue-line);
+}
+
+.menu-course:nth-last-child(-n + 2) { border-bottom: 1px solid var(--blue-line); }
+
+.menu-course__number {
+  color: var(--blue-soft);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .08em;
+}
+
+.menu-course__copy h3 {
+  margin: 0;
+  color: var(--blue-strong);
+  font-size: clamp(1.2rem, 2vw, 1.48rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.menu-course__translation {
+  margin: .25rem 0 0;
+  color: #6678a7;
+  font-size: .95rem;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.menu-course__allergens {
+  display: flex;
+  align-items: flex-start;
+  gap: .42rem;
+  margin: .75rem 0 0;
+  color: #76515a;
+  font-family: var(--font-ui);
+  font-size: .65rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.menu-course__allergens > span:first-child {
+  flex: 0 0 17px;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: .6rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.menu-allergy-note {
+  width: min(100%, 720px);
+  margin: 30px auto 0;
+  padding: 17px 22px;
+  border: 1px solid rgba(118, 81, 90, .25);
+  background: rgba(255, 255, 255, .36);
+  color: #76515a;
+  font-family: var(--font-ui);
+  font-size: .68rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.menu-allergy-note p { margin: 0; }
+
+.wedding-menu__request {
+  display: grid;
+  justify-items: center;
+  gap: .8rem;
+  margin-top: 38px;
+  text-align: center;
+}
+
+.wedding-menu__request p {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+}
+
+.menu-request-button {
+  min-height: 48px;
+  padding: .8rem 1.55rem;
+  border: 1px solid var(--blue-strong);
+  border-radius: 0;
+  color: var(--blue-strong);
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .25s ease, background .25s ease, transform .25s var(--ease);
+}
+
+.menu-request-button:hover,
+.menu-request-button:focus-visible {
+  color: var(--paper-bright);
+  background: var(--blue-strong);
+  transform: translateY(-2px);
+}
+
+.meal-dialog {
+  width: min(calc(100% - 32px), 760px);
+  max-height: min(90svh, 900px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  color: var(--blue);
+  background: var(--paper-bright);
+  border: 1px solid rgba(100, 127, 196, .42);
+  border-radius: 0;
+  box-shadow: 0 32px 90px rgba(16, 28, 20, .34);
+}
+
+.meal-dialog[open] { display: block; }
+
+.meal-dialog::backdrop {
+  background: rgba(10, 19, 14, .7);
+  backdrop-filter: blur(4px);
+}
+
+.meal-dialog__shell {
+  position: relative;
+  max-height: min(90svh, 900px);
+  padding: clamp(30px, 6vw, 54px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background:
+    linear-gradient(rgba(251, 249, 244, .94), rgba(247, 242, 236, .96)),
+    url("../assets/generated/rsvp-floral-frame.webp") center / cover no-repeat;
+}
+
+.meal-dialog__close {
+  position: absolute;
+  z-index: 3;
+  top: 14px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: var(--blue-strong);
+  background: transparent;
+  border: 0;
+  font: 300 2rem/1 var(--font-serif);
+  cursor: pointer;
+}
+
+.meal-dialog__heading {
+  width: min(100%, 570px);
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.meal-dialog__heading .script-note {
+  color: var(--blue-soft);
+  font-size: 1.65rem;
+}
+
+.meal-dialog__heading h2 {
+  margin: .35rem 0 .55rem;
+  color: var(--blue-strong);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.meal-dialog__heading > p:last-child {
+  margin: 0;
+  font-size: .92rem;
+}
+
+.meal-form {
+  display: grid;
+  gap: 1.1rem;
+  width: min(100%, 600px);
+  margin-inline: auto;
+}
+
+.meal-form .field > span,
+.meal-choice legend {
+  color: var(--blue-strong);
+  font-family: var(--font-ui);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.meal-form .field input,
+.meal-form .field textarea,
+.meal-form .field select {
+  width: 100%;
+  padding: .78rem .9rem;
+  color: #344268;
+  background: rgba(255, 255, 255, .7);
+  border: 1px solid var(--blue-line);
+  border-radius: 0;
+  font-family: var(--font-ui);
+  font-size: .84rem;
+  font-weight: 300;
+  line-height: 1.45;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.meal-form .field select { min-height: 50px; }
+.meal-form .field textarea { min-height: 108px; resize: vertical; }
+
+.meal-form .field input:focus,
+.meal-form .field textarea:focus,
+.meal-form .field select:focus {
+  outline: 0;
+  border-color: var(--blue-strong);
+  box-shadow: 0 0 0 3px rgba(100, 127, 196, .11);
+}
+
+.meal-form [aria-invalid="true"] { border-color: #a94d59 !important; }
+
+.meal-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.meal-choice legend {
+  grid-column: 1 / -1;
+  margin-bottom: .45rem;
+}
+
+.meal-choice > label {
+  position: relative;
+  display: block;
+  min-height: 92px;
+  cursor: pointer;
+}
+
+.meal-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.meal-choice label > span {
+  display: grid;
+  align-content: center;
+  gap: .22rem;
+  height: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--blue-line);
+  background: rgba(255, 255, 255, .52);
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.meal-choice label > span::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--blue-soft);
+  border-radius: 50%;
+}
+
+.meal-choice input:checked + span {
+  border-color: var(--blue-strong);
+  background: rgba(226, 232, 247, .56);
+}
+
+.meal-choice input:checked + span::before {
+  border-color: var(--blue-strong);
+  background: var(--blue-strong);
+  box-shadow: inset 0 0 0 2px var(--paper-bright);
+}
+
+.meal-choice input:focus-visible + span {
+  outline: 2px solid var(--blue-strong);
+  outline-offset: 3px;
+}
+
+.meal-choice strong {
+  padding-right: 22px;
+  color: var(--blue-strong);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.meal-choice small {
+  font-family: var(--font-ui);
+  font-size: .65rem;
+  line-height: 1.4;
+}
+
+.vegetarian-choice {
+  display: grid;
+  gap: .8rem;
+  padding: 19px;
+  border: 1px solid rgba(100, 127, 196, .24);
+  background: rgba(255, 255, 255, .34);
+}
+
+.vegetarian-choice__heading { text-align: center; }
+
+.vegetarian-choice__heading p { margin: 0; }
+
+.vegetarian-choice__heading p + p {
+  margin-top: .25rem;
+  font-size: .86rem;
+}
+
+.vegetarian-preview {
+  display: grid;
+  gap: .85rem;
+  margin: 0;
+  padding: .35rem 0 .1rem 1.5rem;
+}
+
+.vegetarian-preview li {
+  padding-left: .2rem;
+  font-size: .9rem;
+  line-height: 1.25;
+}
+
+.vegetarian-preview li strong { display: block; }
+
+.vegetarian-preview li span {
+  display: block;
+  color: #6678a7;
+  font-size: .78rem;
+  font-style: italic;
+}
+
+.vegetarian-preview li small {
+  display: flex;
+  align-items: flex-start;
+  gap: .35rem;
+  margin-top: .38rem;
+  color: #76515a;
+  font-family: var(--font-ui);
+  font-size: .58rem;
+  line-height: 1.45;
+}
+
+.vegetarian-preview li small b {
+  flex: 0 0 15px;
+  display: grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: .52rem;
+  line-height: 1;
+}
+
+.vegetarian-preview li small span {
+  color: inherit;
+  font: inherit;
+  font-style: normal;
+}
+
+.vegetarian-allergy-note {
+  margin: 0;
+  color: #76515a;
+  font-family: var(--font-ui);
+  font-size: .62rem;
+  line-height: 1.5;
+}
+
+.meal-form .submit-button { margin-top: .25rem; }
+
+@media (max-width: 720px) {
+  .wedding-menu { padding-block: 72px 86px; }
+  .wedding-menu__heading h2 { letter-spacing: .055em; }
+  .menu-courses { grid-template-columns: 1fr; width: min(100%, 540px); }
+  .menu-course { min-height: 0; }
+  .menu-course:nth-last-child(-n + 2) { border-bottom: 0; }
+  .menu-course:last-child { border-bottom: 1px solid var(--blue-line); }
+  .wedding-menu__botanical { width: 190px; opacity: .25; }
+  .wedding-menu__botanical--left { left: -90px; }
+  .wedding-menu__botanical--right { right: -90px; }
+}
+
+@media (max-width: 520px) {
+  .wedding-menu .stationery-shell { width: min(calc(100% - 32px), var(--shell)); }
+  .menu-course { grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding-block: 20px; }
+  .menu-course__copy h3 { font-size: 1.17rem; }
+  .menu-course__translation { font-size: .88rem; }
+  .menu-allergy-note { padding-inline: 15px; text-align: left; }
+  .meal-dialog { width: calc(100% - 18px); max-height: 94svh; }
+  .meal-dialog__shell { max-height: 94svh; padding: 42px 18px 26px; }
+  .meal-dialog__close { top: 5px; right: 7px; }
+  .meal-dialog__heading { margin-bottom: 22px; }
+  .meal-dialog__heading h2 { font-size: 2rem; }
+  .meal-choice { grid-template-columns: 1fr; }
+  .meal-choice > label { min-height: 78px; }
+  .vegetarian-choice { padding: 14px; }
+  .meal-form .submit-button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-request-button { transition: none; }
+}

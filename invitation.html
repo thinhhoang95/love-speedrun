@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Great+Vibes&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/invitation.css" />
   <link rel="stylesheet" href="css/gallery.css" />
+  <link rel="stylesheet" href="css/menu.css" />
   <link rel="stylesheet" href="css/navigation.css" />
 </head>
 <body>
@@ -27,6 +28,7 @@
     <nav class="site-navigation" id="site-navigation" aria-label="Điều hướng thiệp cưới" data-i18n-aria="navigation">
       <a href="#invitation-details" data-i18n="nav_invitation">Thiệp báo tin</a>
       <a href="#gallery" data-i18n="nav_gallery">Thư viện ảnh</a>
+      <a href="#menu" data-i18n="nav_menu">Thực đơn</a>
       <a href="#countdown-section" data-i18n="nav_countdown">Đếm ngược</a>
       <a href="#schedule" data-i18n="nav_schedule">Chương trình</a>
       <a href="#wishes" data-i18n="nav_wishes">Lời chúc phúc</a>
@@ -226,6 +228,170 @@
         </div>
       </div>
     </section>
+
+    <section class="paper wedding-menu" id="menu" aria-labelledby="menu-title">
+      <div class="paper__grain" aria-hidden="true"></div>
+      <img
+        class="wedding-menu__botanical wedding-menu__botanical--left"
+        src="assets/generated/gallery/floral-left.webp"
+        alt=""
+        width="941"
+        height="1672"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="wedding-menu__botanical wedding-menu__botanical--right"
+        src="assets/generated/gallery/floral-right.webp"
+        alt=""
+        width="941"
+        height="1672"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <div class="wedding-menu__inner stationery-shell">
+        <header class="wedding-menu__heading reveal">
+          <p class="script-note" data-i18n="menu_kicker">Tiệc cưới</p>
+          <h2 id="menu-title" data-i18n="menu_title">Thực đơn</h2>
+          <img
+            class="leaf-divider"
+            src="assets/generated/botanicals-v2/leaf-divider.webp"
+            alt=""
+            width="700"
+            height="234"
+            loading="lazy"
+            decoding="async"
+          />
+        </header>
+
+        <ol class="menu-courses reveal">
+          <li class="menu-course">
+            <span class="menu-course__number" aria-hidden="true">01</span>
+            <div class="menu-course__copy">
+              <h3 lang="vi">Bông bí nhồi thịt · Gỏi bò bóp thấu</h3>
+              <p class="menu-course__translation" lang="en">Pork-stuffed pumpkin blossoms · Vietnamese beef salad</p>
+              <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_1">Có thể chứa: đậu nành, cá (nước mắm), đậu phộng.</span></p>
+            </div>
+          </li>
+          <li class="menu-course">
+            <span class="menu-course__number" aria-hidden="true">02</span>
+            <div class="menu-course__copy">
+              <h3 lang="vi">Tôm chiên giòn sốt mayonnaise thơm</h3>
+              <p class="menu-course__translation" lang="en">Crispy shrimp with fragrant mayonnaise sauce</p>
+              <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_2">Có thể chứa: giáp xác, trứng, lúa mì (gluten).</span></p>
+            </div>
+          </li>
+          <li class="menu-course">
+            <span class="menu-course__number" aria-hidden="true">03</span>
+            <div class="menu-course__copy">
+              <h3 lang="vi">Bò tiêu xanh · Bánh mì</h3>
+              <p class="menu-course__translation" lang="en">Green pepper beef · Baguette</p>
+              <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_3">Có thể chứa: lúa mì (gluten), sữa, đậu nành.</span></p>
+            </div>
+          </li>
+          <li class="menu-course">
+            <span class="menu-course__number" aria-hidden="true">04</span>
+            <div class="menu-course__copy">
+              <h3 lang="vi">Xôi gà nướng thập cẩm</h3>
+              <p class="menu-course__translation" lang="en">Mixed roast chicken with sticky rice</p>
+              <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_4">Có thể chứa: đậu nành, mè.</span></p>
+            </div>
+          </li>
+          <li class="menu-course">
+            <span class="menu-course__number" aria-hidden="true">05</span>
+            <div class="menu-course__copy">
+              <h3 lang="vi">Lẩu cá tầm măng chua · Bún tươi</h3>
+              <p class="menu-course__translation" lang="en">Sour bamboo shoot sturgeon hotpot · Fresh rice vermicelli</p>
+              <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_5">Có thể chứa: cá, đậu nành.</span></p>
+            </div>
+          </li>
+          <li class="menu-course">
+            <span class="menu-course__number" aria-hidden="true">06</span>
+            <div class="menu-course__copy">
+              <h3 lang="vi">Panna cotta việt quất</h3>
+              <p class="menu-course__translation" lang="en">Blueberry panna cotta</p>
+              <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_6">Có thể chứa: sữa; có thể có các loại hạt dùng trang trí.</span></p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="menu-allergy-note reveal" role="note">
+          <p data-i18n="allergy_disclaimer">Thông tin dị ứng dựa trên cách chế biến phổ biến. Thành phần và nguy cơ tiếp xúc chéo có thể thay đổi; vui lòng ghi rõ mọi dị ứng trong biểu mẫu để nhà hàng xác nhận.</p>
+        </div>
+
+        <div class="wedding-menu__request reveal">
+          <p data-i18n="meal_request_prompt">Bạn dùng món chay hoặc có yêu cầu riêng?</p>
+          <button class="menu-request-button" id="meal-request-open" type="button" data-i18n="meal_request_open">Gửi yêu cầu món ăn</button>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="meal-dialog" id="meal-dialog" aria-labelledby="meal-dialog-title" aria-describedby="meal-dialog-intro">
+      <div class="meal-dialog__shell">
+        <button class="meal-dialog__close" id="meal-dialog-close" type="button" aria-label="Đóng biểu mẫu món ăn" data-i18n-aria="meal_dialog_close">×</button>
+        <header class="meal-dialog__heading">
+          <p class="script-note" data-i18n="meal_dialog_kicker">Dành riêng cho bạn</p>
+          <h2 id="meal-dialog-title" data-i18n="meal_dialog_title">Yêu cầu món ăn</h2>
+        </header>
+
+        <form class="meal-form" id="meal-form" novalidate>
+          <label class="field">
+            <span data-i18n="meal_name">Tên khách mời</span>
+            <input id="meal-name" name="name" type="text" maxlength="80" autocomplete="name" required />
+          </label>
+
+          <fieldset class="meal-choice">
+            <legend data-i18n="meal_preference">Lựa chọn món ăn</legend>
+            <label>
+              <input name="mealType" type="radio" value="standard" checked />
+              <span><strong data-i18n="meal_standard">Thực đơn mặn</strong><small data-i18n="meal_standard_hint">Sáu món được giới thiệu ở trên</small></span>
+            </label>
+            <label>
+              <input name="mealType" type="radio" value="vegetarian" />
+              <span><strong data-i18n="meal_vegetarian">Thực đơn chay</strong><small data-i18n="meal_vegetarian_hint">Set 01 gồm bốn món chay của nhà hàng</small></span>
+            </label>
+          </fieldset>
+
+          <div class="vegetarian-choice" id="vegetarian-choice" hidden>
+            <header class="vegetarian-choice__heading">
+              <p class="small-caps" data-i18n="vegetarian_fixed_title">Set chay 01 · 4 món</p>
+            </header>
+            <ol class="vegetarian-preview">
+              <li>
+                <strong lang="vi">Súp Bào Ngư Vi Cá Hải Sâm</strong>
+                <span lang="en">Vegan abalone, shark fin &amp; sea cucumber soup</span>
+                <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_1">Có thể chứa: đậu nành, lúa mì (gluten), mè.</span></small>
+              </li>
+              <li>
+                <strong lang="vi">Bò Xào Hương Truffle · Bánh Mì</strong>
+                <span lang="en">Truffle vegetarian beef · Bread</span>
+                <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_2">Có thể chứa: đậu nành, lúa mì (gluten).</span></small>
+              </li>
+              <li>
+                <strong lang="vi">Cơm Chiên Kỷ Tử</strong>
+                <span lang="en">Goji berry fried rice</span>
+                <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_3">Có thể chứa: đậu nành, mè.</span></small>
+              </li>
+              <li>
+                <strong lang="vi">Trái Cây (Cam &amp; Nho)</strong>
+                <span lang="en">Oranges &amp; grapes</span>
+                <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_4">Không nhận diện chất gây dị ứng phổ biến; vẫn có nguy cơ tiếp xúc chéo.</span></small>
+              </li>
+            </ol>
+            <p class="vegetarian-allergy-note" data-i18n="vegetarian_allergy_note">Thành phần và nguy cơ tiếp xúc chéo có thể thay đổi. Hãy ghi rõ mọi dị ứng của bạn bên dưới để nhà hàng xác nhận.</p>
+          </div>
+
+          <label class="field">
+            <span data-i18n="meal_notes">Ghi chú cá nhân hoặc dị ứng</span>
+            <textarea id="meal-notes" name="notes" rows="4" maxlength="1000" placeholder="Ví dụ: dị ứng đậu phộng, không dùng sữa…" data-i18n-placeholder="meal_notes_placeholder"></textarea>
+          </label>
+
+          <button class="submit-button" id="meal-submit" type="submit" data-i18n="meal_submit">Gửi yêu cầu</button>
+          <p class="form-status" id="meal-status" role="status" hidden></p>
+        </form>
+      </div>
+    </dialog>
 
     <dialog class="gallery-viewer" id="gallery-viewer" aria-label="Xem ảnh cưới" data-i18n-aria="gallery_viewer">
       <button class="gallery-viewer__close" type="button" aria-label="Đóng ảnh" data-i18n-aria="gallery_close">×</button>

@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { generateWish } from './generateWish.js';
 import { getWishStats } from './wishStats.js';
+import { saveMealPreference } from './mealPreferences.js';
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = Number.parseInt(process.env.PORT || '8787', 10);
@@ -74,6 +75,15 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       sendJson(res, 200, await generateWish(await readJsonBody(req)));
+      return;
+    }
+
+    if (pathname === '/api/meal-preferences') {
+      if (req.method !== 'POST') {
+        sendJson(res, 405, { error: 'Method not allowed' }, { Allow: 'POST' });
+        return;
+      }
+      sendJson(res, 201, await saveMealPreference(await readJsonBody(req)));
       return;
     }
 

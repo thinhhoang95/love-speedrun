@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { readFile } from 'node:fs/promises';
 import { generateWish } from './server/generateWish.js';
 import { getWishStats } from './server/wishStats.js';
+import { saveMealPreference } from './server/mealPreferences.js';
 
 const HTML_PAGES = new Set([
   '/',
@@ -99,6 +100,29 @@ export default defineConfig(({ mode }) => {
           res.end(JSON.stringify({
             error: err.status && err.status < 500 ? err.message : 'Không tạo được lời chúc lúc này.',
           }));
+        }
+      });
+
+      server.middlewares.use('/api/meal-preferences', async (req, res) => {
+        if (req.method !== 'POST') {
+          res.statusCode = 405;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Method not allowed' }));
+          return;
+        }
+
+        try {
+          const body = await readJsonBody(req);
+          const result = await saveMealPreference(body);
+          res.statusCode = 201;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(result));
+        } catch (err) {
+          console.error('meal-preferences failed:', err);
+          const status = Number.isInteger(err.status) ? err.status : 500;
+          res.statusCode = status;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: status < 500 ? err.message : 'Could not save meal request.' }));
         }
       });
 
