@@ -94,6 +94,8 @@
   line-height: 1.3;
 }
 
+html[data-language="en"] .dish-subtitle { display: none; }
+
 .menu-course__allergens {
   display: flex;
   align-items: flex-start;
@@ -480,3 +482,33 @@
 @media (prefers-reduced-motion: reduce) {
   .menu-request-button { transition: none; }
 }
+
+html[data-theme="dark"] .menu-course__translation,
+html[data-theme="dark"] .vegetarian-preview li > span { color: #aab9df; }
+
+html[data-theme="dark"] .menu-course__allergens,
+html[data-theme="dark"] .menu-allergy-note,
+html[data-theme="dark"] .vegetarian-preview li small,
+html[data-theme="dark"] .vegetarian-allergy-note { color: #d8aeb8; }
+
+html[data-theme="dark"] .menu-allergy-note,
+html[data-theme="dark"] .vegetarian-choice { background: rgba(255, 255, 255, .035); }
+
+html[data-theme="dark"] .meal-dialog {
+  background: var(--paper-bright);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, .62);
+}
+
+html[data-theme="dark"] .meal-dialog__shell {
+  background: linear-gradient(rgba(24, 34, 53, .96), rgba(17, 24, 38, .97));
+}
+
+html[data-theme="dark"] .meal-form .field input,
+html[data-theme="dark"] .meal-form .field textarea,
+html[data-theme="dark"] .meal-form .field select,
+html[data-theme="dark"] .meal-choice label > span {
+  color: var(--blue-strong);
+  background: rgba(255, 255, 255, .045);
+}
+
+html[data-theme="dark"] .meal-choice input:checked + span { background: rgba(146, 169, 223, .13); }

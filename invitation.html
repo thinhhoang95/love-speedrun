@@ -6,6 +6,16 @@
   <meta name="theme-color" content="#152014" />
   <meta name="description" content="Thiệp mời lễ thành hôn của Thịnh và Vy — Chủ Nhật, ngày 02 tháng 08 năm 2026." data-i18n-content="meta_description" />
   <title>Vy &amp; Thịnh — Thiệp Mời Lễ Thành Hôn</title>
+  <script>
+    try {
+      const savedTheme = localStorage.getItem('invitation_theme');
+      document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark'
+        ? savedTheme
+        : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } catch {
+      document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,6 +46,10 @@
     </nav>
 
     <div class="site-header__controls">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Chuyển sang giao diện tối" data-i18n-theme>
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
+      </button>
       <label class="language-control" for="language-select">
         <span class="language-control__icon" aria-hidden="true">◎</span>
         <span class="visually-hidden" data-i18n="language">Ngôn ngữ</span>
@@ -269,48 +283,48 @@
           <li class="menu-course">
             <span class="menu-course__number" aria-hidden="true">01</span>
             <div class="menu-course__copy">
-              <h3 lang="vi">Bông bí nhồi thịt · Gỏi bò bóp thấu</h3>
-              <p class="menu-course__translation" lang="en">Pork-stuffed pumpkin blossoms · Vietnamese beef salad</p>
+              <h3 lang="vi" data-i18n="dish_1" data-i18n-dish>Bông bí nhồi thịt · Gỏi bò bóp thấu</h3>
+              <p class="menu-course__translation dish-subtitle" lang="en">Pork-stuffed pumpkin blossoms · Vietnamese beef salad</p>
               <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_1">Có thể chứa: đậu nành, cá (nước mắm), đậu phộng.</span></p>
             </div>
           </li>
           <li class="menu-course">
             <span class="menu-course__number" aria-hidden="true">02</span>
             <div class="menu-course__copy">
-              <h3 lang="vi">Tôm chiên giòn sốt mayonnaise thơm</h3>
-              <p class="menu-course__translation" lang="en">Crispy shrimp with fragrant mayonnaise sauce</p>
+              <h3 lang="vi" data-i18n="dish_2" data-i18n-dish>Tôm chiên giòn sốt mayonnaise thơm</h3>
+              <p class="menu-course__translation dish-subtitle" lang="en">Crispy shrimp with fragrant mayonnaise sauce</p>
               <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_2">Có thể chứa: giáp xác, trứng, lúa mì (gluten).</span></p>
             </div>
           </li>
           <li class="menu-course">
             <span class="menu-course__number" aria-hidden="true">03</span>
             <div class="menu-course__copy">
-              <h3 lang="vi">Bò tiêu xanh · Bánh mì</h3>
-              <p class="menu-course__translation" lang="en">Green pepper beef · Baguette</p>
+              <h3 lang="vi" data-i18n="dish_3" data-i18n-dish>Bò tiêu xanh · Bánh mì</h3>
+              <p class="menu-course__translation dish-subtitle" lang="en">Green pepper beef · Baguette</p>
               <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_3">Có thể chứa: lúa mì (gluten), sữa, đậu nành.</span></p>
             </div>
           </li>
           <li class="menu-course">
             <span class="menu-course__number" aria-hidden="true">04</span>
             <div class="menu-course__copy">
-              <h3 lang="vi">Xôi gà nướng thập cẩm</h3>
-              <p class="menu-course__translation" lang="en">Mixed roast chicken with sticky rice</p>
+              <h3 lang="vi" data-i18n="dish_4" data-i18n-dish>Xôi gà nướng thập cẩm</h3>
+              <p class="menu-course__translation dish-subtitle" lang="en">Mixed roast chicken with sticky rice</p>
               <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_4">Có thể chứa: đậu nành, mè.</span></p>
             </div>
           </li>
           <li class="menu-course">
             <span class="menu-course__number" aria-hidden="true">05</span>
             <div class="menu-course__copy">
-              <h3 lang="vi">Lẩu cá tầm măng chua · Bún tươi</h3>
-              <p class="menu-course__translation" lang="en">Sour bamboo shoot sturgeon hotpot · Fresh rice vermicelli</p>
+              <h3 lang="vi" data-i18n="dish_5" data-i18n-dish>Lẩu cá tầm măng chua · Bún tươi</h3>
+              <p class="menu-course__translation dish-subtitle" lang="en">Sour bamboo shoot sturgeon hotpot · Fresh rice vermicelli</p>
               <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_5">Có thể chứa: cá, đậu nành.</span></p>
             </div>
           </li>
           <li class="menu-course">
             <span class="menu-course__number" aria-hidden="true">06</span>
             <div class="menu-course__copy">
-              <h3 lang="vi">Panna cotta việt quất</h3>
-              <p class="menu-course__translation" lang="en">Blueberry panna cotta</p>
+              <h3 lang="vi" data-i18n="dish_6" data-i18n-dish>Panna cotta việt quất</h3>
+              <p class="menu-course__translation dish-subtitle" lang="en">Blueberry panna cotta</p>
               <p class="menu-course__allergens"><span aria-hidden="true">!</span> <span data-i18n="allergen_6">Có thể chứa: sữa; có thể có các loại hạt dùng trang trí.</span></p>
             </div>
           </li>
@@ -359,23 +373,23 @@
             </header>
             <ol class="vegetarian-preview">
               <li>
-                <strong lang="vi">Súp Bào Ngư Vi Cá Hải Sâm</strong>
-                <span lang="en">Vegan abalone, shark fin &amp; sea cucumber soup</span>
+                <strong lang="vi" data-i18n="vegetarian_dish_1" data-i18n-dish>Súp Bào Ngư Vi Cá Hải Sâm</strong>
+                <span class="dish-subtitle" lang="en">Vegan abalone, shark fin &amp; sea cucumber soup</span>
                 <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_1">Có thể chứa: đậu nành, lúa mì (gluten), mè.</span></small>
               </li>
               <li>
-                <strong lang="vi">Bò Xào Hương Truffle · Bánh Mì</strong>
-                <span lang="en">Truffle vegetarian beef · Bread</span>
+                <strong lang="vi" data-i18n="vegetarian_dish_2" data-i18n-dish>Bò Xào Hương Truffle · Bánh Mì</strong>
+                <span class="dish-subtitle" lang="en">Truffle vegetarian beef · Bread</span>
                 <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_2">Có thể chứa: đậu nành, lúa mì (gluten).</span></small>
               </li>
               <li>
-                <strong lang="vi">Cơm Chiên Kỷ Tử</strong>
-                <span lang="en">Goji berry fried rice</span>
+                <strong lang="vi" data-i18n="vegetarian_dish_3" data-i18n-dish>Cơm Chiên Kỷ Tử</strong>
+                <span class="dish-subtitle" lang="en">Goji berry fried rice</span>
                 <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_3">Có thể chứa: đậu nành, mè.</span></small>
               </li>
               <li>
-                <strong lang="vi">Trái Cây (Cam &amp; Nho)</strong>
-                <span lang="en">Oranges &amp; grapes</span>
+                <strong lang="vi" data-i18n="vegetarian_dish_4" data-i18n-dish>Trái Cây (Cam &amp; Nho)</strong>
+                <span class="dish-subtitle" lang="en">Oranges &amp; grapes</span>
                 <small><b aria-hidden="true">!</b> <span data-i18n="vegetarian_allergen_4">Không nhận diện chất gây dị ứng phổ biến; vẫn có nguy cơ tiếp xúc chéo.</span></small>
               </li>
             </ol>

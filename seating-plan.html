@@ -6,6 +6,16 @@
   <meta name="theme-color" content="#152014" />
   <meta name="description" content="Sơ đồ chỗ ngồi lễ thành hôn của Thịnh và Vy." data-i18n-content="seating_meta_description" />
   <title data-i18n-title="seating_page_title">Thịnh &amp; Vy — Sơ Đồ Chỗ Ngồi</title>
+  <script>
+    try {
+      const savedTheme = localStorage.getItem('invitation_theme');
+      document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark'
+        ? savedTheme
+        : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } catch {
+      document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +30,11 @@
     <a class="back-link" href="invitation.html" aria-label="Trở về thiệp cưới" data-i18n-aria="back_invitation_aria">
       <span aria-hidden="true">←</span> <span data-i18n="back_invitation">Thiệp cưới</span>
     </a>
+    <div class="plan-hero__controls">
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Chuyển sang giao diện tối" data-i18n-theme>
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
+    </button>
     <label class="language-control" for="language-select">
       <span class="language-control__icon" aria-hidden="true">◎</span>
       <span class="sr-only" data-i18n="language">Ngôn ngữ</span>
@@ -31,6 +46,7 @@
         <option value="ja">日本語</option>
       </select>
     </label>
+    </div>
     <img
       class="plan-hero__monogram"
       src="assets/generated/branding/monogram-official-192.png"

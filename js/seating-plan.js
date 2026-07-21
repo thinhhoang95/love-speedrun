@@ -1,6 +1,8 @@
 import { getTranslations, initializeLanguage } from './invitation-i18n.js';
+import { initializeTheme } from './theme.js';
 
 initializeLanguage();
+initializeTheme();
 
 // Change this to true when the final seating data is ready to publish.
 const SEATING_PLAN_AVAILABLE = false;

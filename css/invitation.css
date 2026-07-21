@@ -13,6 +13,20 @@
   --font-ui: "Be Vietnam Pro", system-ui, sans-serif;
   --shell: 1120px;
   --ease: cubic-bezier(.22, .61, .36, 1);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --paper: #111826;
+  --paper-bright: #182235;
+  --blue: #b9c8ef;
+  --blue-strong: #d6dfff;
+  --blue-soft: #92a9df;
+  --blue-line: #354361;
+  --forest: #080d0b;
+  --cream: #f8f4e9;
+  --ink: #c5d1f0;
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -1110,4 +1124,42 @@ a { color: inherit; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
   .petals { display: none; }
+}
+
+/* Dark palette: selected explicitly or initialized from the operating system. */
+html[data-theme="dark"] .paper {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(146, 169, 223, .09), transparent 30%),
+    linear-gradient(135deg, var(--paper-bright), var(--paper));
+}
+
+html[data-theme="dark"] .paper__grain { opacity: .22; mix-blend-mode: screen; }
+html[data-theme="dark"] .monogram-img--rsvp,
+html[data-theme="dark"] .monogram-img--footer { filter: brightness(0) invert(1); }
+html[data-theme="dark"] .timeline__event,
+html[data-theme="dark"] .wish-form { background: rgba(255, 255, 255, .035); box-shadow: 0 18px 50px rgba(0, 0, 0, .2); }
+
+html[data-theme="dark"] .rsvp {
+  background: var(--paper) linear-gradient(rgba(17, 24, 38, .88), rgba(17, 24, 38, .88));
+}
+
+html[data-theme="dark"] .rsvp__shade { background: radial-gradient(circle at center, rgba(146, 169, 223, .06), transparent 55%); }
+
+html[data-theme="dark"] .field input,
+html[data-theme="dark"] .field textarea {
+  color: var(--blue-strong);
+  background: rgba(255, 255, 255, .045);
+}
+
+html[data-theme="dark"] .music-credit,
+html[data-theme="dark"] .music-toggle {
+  color: var(--blue-strong);
+  background: rgba(24, 34, 53, .94);
+  border-color: rgba(146, 169, 223, .3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .32);
+}
+
+html[data-theme="dark"] .music-credit::after {
+  background: rgba(24, 34, 53, .94);
+  border-color: rgba(146, 169, 223, .3);
 }

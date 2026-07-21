@@ -445,3 +445,7 @@
   .photo-gallery__tab,
   .photo-gallery__tab::after { transition: none; }
 }
+
+html[data-theme="dark"] .photo-gallery__tab[aria-selected="true"] { background: rgba(146, 169, 223, .1); }
+html[data-theme="dark"] .photo-gallery__more { background: rgba(24, 34, 53, .72); }
+html[data-theme="dark"] .photo-gallery__empty { background: #1b2431; }

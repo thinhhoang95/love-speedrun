@@ -2,8 +2,10 @@ import './gallery.js';
 import './navigation.js';
 import './meal-preferences.js';
 import { getTranslations, initializeLanguage } from './invitation-i18n.js';
+import { initializeTheme } from './theme.js';
 
 initializeLanguage();
+initializeTheme();
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
